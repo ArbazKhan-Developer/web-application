@@ -12,5 +12,29 @@ async function getAllUser() {
     }
 }
 
+async function deleteUser(id){
+    try {
+        const user = await db.findByIdAndDelete(id)
+        console.log(user);
+        console.log(`user deleted successfully.`);
+        return user;
+    } catch (error) {
+        console.log(`error occurred while deleting user: ${error}`);
+        throw error;
+    }
+}
 
-module.exports = {getAllUser};
+async function deleteAllUser() {
+    try {
+        const res = await db.deleteMany()
+        console.log(res);
+        console.log("all users deleted successfully.");
+        return res
+    } catch (error) {
+        console.log(`error occurred while deleting all users: ${error}`);
+        throw error;
+    }
+}
+
+
+module.exports = {getAllUser, deleteUser, deleteAllUser};
